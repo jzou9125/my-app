@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
-import Node from "./Node/Node";
 import "./PathfinderVisualizer.css";
-import GraphPaper from "./GraphPaper/GraphPaper";
+import GraphingPaper from "./GraphPaper/GraphPaper";
 
 export default class PathfinderVisualizer extends Component {
   constructor(props) {
@@ -12,10 +11,7 @@ export default class PathfinderVisualizer extends Component {
   render() {
     return (
       <>
-        <div>
-          <GraphPaper> </GraphPaper>
-        </div>
-        <div> yes</div>
+        <GraphingPaper size={35} />
       </>
     );
   }

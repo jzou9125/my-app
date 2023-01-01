@@ -1,85 +1,42 @@
-import { useState, useEffect } from "react";
-import "./GraphPaper.css";
+import React, { useEffect, useState } from "react";
+import Node from "../Node/Node";
 
-function GraphPaper() {
-  // Create a 2D array to represent the graph paper
-  const [grid, setGrid] = useState([]);
-  const [startNode, setStartNode] = useState(null);
-  const [targetNode, setTargetNode] = useState(null);
+function GraphingPaper({ size }) {
+  const nodes = [];
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+  const start = { row: 10, column: 10 };
+  const target = { row: 10, column: 30 };
 
   useEffect(() => {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const squareSize = 22;
-
-    const rows = Math.ceil(screenHeight / squareSize);
-    const columns = Math.ceil(screenWidth / squareSize);
-
-    const newGrid = Array.from({ length: rows }, () => []);
-    setGrid(newGrid.map((row) => Array.from({ length: columns }, () => null)));
+    function handleResize() {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const handleClick = (rowIndex, colIndex) => {
-    console.log(rowIndex, colIndex);
-    // Check if the start node has already been set
-    if (startNode) {
-      // If the start node has been set, set the target node
-      setTargetNode({ row: rowIndex, col: colIndex });
-    } else {
-      // If the start node has not been set, set the start node
-      setStartNode({ row: rowIndex, col: colIndex });
+  const cols = width / (size + 2);
+  const rows = height / (size + 2);
+  console.log(height, cols * 37);
+  console.log(rows, cols);
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      nodes.push(
+        <Node
+          id={`${i},${j}`}
+          size={size}
+          is_start={i == start.row && j == start.column}
+          is_target={i == target.row && j == target.column}
+        />
+      );
     }
-  };
+  }
 
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, 22px)",
-        gridTemplateRows: "repeat(auto-fit, 22px)",
-        gridGap: "0",
-        overflow: "hidden",
-        overflowY: "hidden",
-      }}
-    >
-      {grid.map((rows, rowIndex) =>
-        rows.map((item, colIndex) => {
-          // Determine the class to apply to the cell based on its state
-          let className = "";
-          if (
-            startNode &&
-            startNode.row === rowIndex &&
-            startNode.col === colIndex
-          ) {
-            className = "start-node";
-          } else if (
-            targetNode &&
-            targetNode.row === rowIndex &&
-            targetNode.col === colIndex
-          ) {
-            className = "target-node";
-          }
-
-          return (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              style={{
-                gridColumn: `${colIndex + 1} / ${colIndex + 2}`,
-                gridRow: `${rowIndex + 1} / ${rowIndex + 2}`,
-                width: "20px",
-                height: "20px",
-                border: "1px solid black",
-              }}
-              className={className}
-              onClick={() => handleClick(rowIndex, colIndex)}
-            >
-              {item || ""}
-            </div>
-          );
-        })
-      )}
-    </div>
-  );
+  return <div style={{ display: "flex", flexWrap: "wrap" }}>{nodes}</div>;
 }
 
-export default GraphPaper;
+export default GraphingPaper;
