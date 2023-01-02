@@ -5,3 +5,7 @@
 .target {
   background-color: red;
 }
+
+.wall {
+  background-color: darkslategray;
+}

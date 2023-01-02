@@ -1,14 +1,14 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component} from "react";
 import "./PathfinderVisualizer.css";
-import GraphingPaper from "./GraphPaper/GraphPaper";
 
 export default class PathfinderVisualizer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.graph = this.props.graph;
   }
 
   render() {
-    return <GraphingPaper size={35} />;
+    return <div>{this.graph}</div>;
   }
 }
