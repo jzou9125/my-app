@@ -9,10 +9,6 @@ export default class PathfinderVisualizer extends Component {
   }
 
   render() {
-    return (
-      <>
-        <GraphingPaper size={35} />
-      </>
-    );
+    return <GraphingPaper size={35} />;
   }
 }

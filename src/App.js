@@ -4,7 +4,7 @@ import PathfinderVisualizer from "./Pathfinder/PathfinderVisualizer";
 function App() {
   return (
     <div className="App">
-      <PathfinderVisualizer></PathfinderVisualizer>
+      <PathfinderVisualizer />
     </div>
   );
 }

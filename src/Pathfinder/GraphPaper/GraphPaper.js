@@ -34,7 +34,7 @@ function GraphingPaper({ size }) {
       nodes.push(
         <Node
           ref={addToGraph}
-          id={`${i},${j}`}
+          key={`${i},${j}`}
           row={i}
           column={j}
           size={size}
