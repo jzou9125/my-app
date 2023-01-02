@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 class Node extends Component {
   render() {
-    const { id, size, is_start, is_target } = this.props;
+    const { id, row, column, size, is_start, is_target } = this.props;
     const className = is_start ? "start" : is_target ? "target" : "";
 
     return (
