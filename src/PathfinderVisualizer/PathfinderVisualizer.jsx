@@ -26,7 +26,7 @@ export const PathfinderVisualizer = (props) => {
   useEffect(() => {
     const resizeListener = () => {
       setWidth(window.innerWidth);
-      setHeight(window.innerHeight - 80);
+      setHeight(window.innerHeight - 75);
     };
     window.addEventListener("resize", resizeListener);
     return () => {
@@ -35,13 +35,11 @@ export const PathfinderVisualizer = (props) => {
   }, []);
 
   const initGrid = (rows, columns) => {
-    let newGrid = [];
+    let newGrid = Array.from({ length: rows }, () => Array(columns).fill(null));
     for (let row = 0; row < rows; row++) {
-      let currentRow = [];
       for (let column = 0; column < columns; column++) {
-        currentRow.push(nodeProps(row, column));
+        newGrid[row][column] = nodeProps(row, column);
       }
-      newGrid.push(currentRow);
     }
     return newGrid;
   };
