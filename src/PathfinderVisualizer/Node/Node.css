@@ -1,0 +1,13 @@
+.node {
+  outline-style: solid;
+  outline-width: 0.5px;
+  height: 32px;
+}
+
+.node-start {
+  background-color: green;
+}
+
+.node-finish {
+  background-color: red;
+}
