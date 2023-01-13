@@ -15,14 +15,23 @@ export const PathfinderVisualizer = (props) => {
   useEffect(() => {
     setStart([Math.floor(rows / 3), Math.floor(columns / 3)]);
     setEnd([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
+    setGrid(initGrid(rows, columns));
   }, [rows, columns]);
 
   useEffect(() => {
-    const newRows = Math.floor(height / square_size);
-    const newColumns = Math.floor(width / square_size);
-    setRows(newRows);
-    setColumns(newColumns);
-    setGrid(initGrid(newRows, newColumns));
+    setRows(Math.floor(height / square_size));
+    setColumns(Math.floor(width / square_size));
+  }, [height, width]);
+
+  useEffect(() => {
+    const resizeListener = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight - 80);
+    };
+    window.addEventListener("resize", resizeListener);
+    return () => {
+      window.removeEventListener("resize", resizeListener);
+    };
   }, []);
 
   const initGrid = (rows, columns) => {
