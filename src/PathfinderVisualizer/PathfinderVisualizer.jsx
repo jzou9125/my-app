@@ -5,7 +5,7 @@ import "./PathfinderVisualizer.css";
 export const PathfinderVisualizer = (props) => {
   const [grid, setGrid] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight - 75); //75 needs to be replaced with the size of other components
+  const [height, setHeight] = useState(window.innerHeight - 40); //75 needs to be replaced with the size of other components
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const [start, setStart] = useState([0, 0]);
@@ -26,7 +26,7 @@ export const PathfinderVisualizer = (props) => {
   useEffect(() => {
     const resizeListener = () => {
       setWidth(window.innerWidth);
-      setHeight(window.innerHeight - 75);
+      setHeight(window.innerHeight - 40);
     };
     window.addEventListener("resize", resizeListener);
     return () => {
