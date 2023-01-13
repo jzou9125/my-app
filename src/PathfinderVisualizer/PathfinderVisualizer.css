@@ -1,5 +1,16 @@
-.grid {
-  width: 100%;
+.grid-container {
   display: grid;
+  height: 100%;
+  grid-template-rows: 1fr 3fr;
+}
+
+.menu {
+  display: inline-block;
+  background-color: beige;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
   grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
 }

@@ -54,10 +54,11 @@ export const PathfinderVisualizer = (props) => {
       previousNode: null,
     };
   };
+
   return (
-    <div>
-      <div> Header menu</div>
-      <div className="grid">
+    <div className="grid-container">
+      <div className="menu"> Header menu</div>
+      <div className="board">
         {grid.map((row, x) =>
           row.map((node, y) => (
             <Node
