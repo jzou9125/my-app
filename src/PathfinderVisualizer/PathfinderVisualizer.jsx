@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Node from "./Node/Node";
 import "./PathfinderVisualizer.css";
+import DFS from "../Algorithmns/DFS";
 
 export const PathfinderVisualizer = (props) => {
   const [grid, setGrid] = useState([]);
@@ -9,12 +10,12 @@ export const PathfinderVisualizer = (props) => {
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const [start, setStart] = useState([0, 0]);
-  const [end, setEnd] = useState([0, 0]);
+  const [target, setTarget] = useState([0, 0]);
   const square_size = 32;
 
   useEffect(() => {
     setStart([Math.floor(rows / 3), Math.floor(columns / 3)]);
-    setEnd([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
+    setTarget([Math.floor(rows / 3), Math.floor((columns / 3) * 2)]);
     setGrid(initGrid(rows, columns));
   }, [rows, columns]);
 
@@ -57,14 +58,19 @@ export const PathfinderVisualizer = (props) => {
 
   return (
     <div className="grid-container">
-      <div className="menu"> Header menu</div>
+      <div className="menu">
+        Header menu
+        <button onClick={() => DFS({ grid, setGrid, start, target })}>
+          DFS
+        </button>
+      </div>
       <div className="board">
         {grid.map((row, x) =>
           row.map((node, y) => (
             <Node
               key={`${x}-${y}`}
               isStart={node.row === start[0] && node.column === start[1]}
-              isFinish={node.row === end[0] && node.column === end[1]}
+              isFinish={node.row === target[0] && node.column === target[1]}
               isVisited={node.isVisited}
               isWall={node.isWall}
             />
